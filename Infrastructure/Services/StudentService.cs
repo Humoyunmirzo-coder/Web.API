@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Services
 {
-    public  class StudentService : IStudentService
+    public class StudentService : IStudentService
     {
         private readonly List<Student> _students = new List<Student>();
 
@@ -36,11 +36,15 @@ namespace Infrastructure.Services
             return Task.CompletedTask;
         }
 
-        public Task DeleteStudentAsync(Guid id)
+        public Task<bool> DeleteStudentAsync(Guid id)
         {
-            _students.RemoveAll(s => s.Id == id);
-            return Task.CompletedTask;
-        }
+            var student = _students.FirstOrDefault(s => s.Id == id);
+            if (student == null)
+                return Task.FromResult(false);
 
+            _students.Remove(student);
+            return Task.FromResult(true);
+
+        }
     }
 }

@@ -1,5 +1,11 @@
+using Aplication.Services;
+using FastEndpoints;
+using Infrastructure.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddFastEndpoints();
+builder.Services.AddSingleton<IStudentService, StudentService>(); // Add by DI
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -8,6 +14,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+app.UseFastEndpoints();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

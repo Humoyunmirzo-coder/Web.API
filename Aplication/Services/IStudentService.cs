@@ -13,6 +13,10 @@ namespace Aplication.Services
         Task<Student> GetStudentByIdAsync(Guid id);
         Task AddStudentAsync(Student student);
         Task UpdateStudentAsync(Student student);
-        Task DeleteStudentAsync(Guid id);
+        Task<bool> DeleteStudentAsync(Guid id); 
+
+
+
+        //Task AddStudentAsync(Student student);
     }
 }
